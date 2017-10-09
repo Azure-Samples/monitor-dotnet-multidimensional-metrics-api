@@ -1,7 +1,7 @@
 ---
 services: azure-monitor
 platforms: dotnet
-author: devigned
+author: gucalder
 ---
 
 # Retrieve Azure Monitor multi-dimensional metrics with .NET

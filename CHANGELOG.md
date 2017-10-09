@@ -1,4 +1,4 @@
-## [project-title] Changelog
+## Azure-Samples/monitor-dotnet-multidimensional-metrics-api Changelog
 
 <a name="1.0.0"></a>
 # 1.0.0 (2017-10-09)
