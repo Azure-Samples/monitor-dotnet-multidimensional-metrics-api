@@ -86,7 +86,7 @@ IEnumerable<MetricDefinition> metricDefinitions = await readOnlyClient.MetricDef
 ### List multi dimensional metrics for a resource
 
 ```csharp
-IEnumerable<Metric> metrics = await readOnlyClient.Metrics.ListAsync(resourceUri: resourceUri, cancellationToken: CancellationToken.None);
+Response metrics = await readOnlyClient.Metrics.ListAsync(resourceUri: resourceUri, cancellationToken: CancellationToken.None);
 ```
 
 or with arguments
@@ -113,7 +113,7 @@ metrics = await readOnlyClient.Metrics.ListAsync(
                 resourceUri: resourceUri,
                 timespan: timeSpan,
                 resultType: ResultType.Data,
-                cancellationToken: CancellationToken.None).Result;
+                cancellationToken: CancellationToken.None);
 EnumerateMetrics(metrics);
 
 // interval is equivalent to timeGrain in the single dimension API
@@ -123,7 +123,7 @@ metrics = await readOnlyClient.Metrics.ListAsync(
                 timespan: timeSpan,
                 interval: System.TimeSpan.FromMinutes(5),
                 resultType: ResultType.Data,
-                cancellationToken: CancellationToken.None).Result;
+                cancellationToken: CancellationToken.None);
 EnumerateMetrics(metrics);
 
 Write("Call to retrieve time series with timespan, interval, and metric parameters");
@@ -133,7 +133,7 @@ metrics = await readOnlyClient.Metrics.ListAsync(
                 interval: System.TimeSpan.FromMinutes(5),
                 metric: "CpuPercentage",
                 resultType: ResultType.Data,
-                cancellationToken: CancellationToken.None).Result;
+                cancellationToken: CancellationToken.None);
 EnumerateMetrics(metrics);
 
 Write("Call to retrieve time series with timespan, interval, metric, and aggregation parameters");
@@ -144,13 +144,13 @@ metrics = await readOnlyClient.Metrics.ListAsync(
                 metric: "CpuPercentage",
                 aggregation: "Count",
                 resultType: ResultType.Data,
-                cancellationToken: CancellationToken.None).Result;
+                cancellationToken: CancellationToken.None);
 EnumerateMetrics(metrics);
 
 Write("Call to retrieve time series with timespan, interval, metric, and $filter parameters. NOTE: $filter is reserved for metadata only.");
 // Filter (just an example). The user must know which metadata are available.
 // More conditions can be added with the 'or' and 'and' operators
-ODataQuery<MetadataValue> odataFilterMetrics = new ODataQuery<Metric>(
+ODataQuery<MetadataValue> odataFilterMetrics = new ODataQuery<MetadataValue>(
     string.Format(
         "Metadata1 eq '{0}' and Metadata2 eq '{1}' or Metadata3 eq '*'",
         "m1",
@@ -168,14 +168,14 @@ EnumerateMetrics(metrics);
 
 Write("Call to retrieve metadata with timespan");
 // For this query (for metadata) requires at least one metadata eq '*'
-odataFilterMetrics = new ODataQuery<Metric>("Metadata3 eq '*'");
+odataFilterMetrics = new ODataQuery<MetadataValue>("Metadata3 eq '*'");
 var metadata = await readOnlyClient.Metrics.ListAsync(
                 resourceUri: resourceUri,
                 odataQuery: odataFilterMetrics,
                 timespan: timeSpan,
                 metric: "CpuPercentage",
                 resultType: ResultType.Metadata,
-                cancellationToken: CancellationToken.None).Result;
+                cancellationToken: CancellationToken.None);
 EnumerateMetrics(metrics);
 ```
 
