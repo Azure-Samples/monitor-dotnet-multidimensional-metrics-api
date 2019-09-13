@@ -1,7 +1,11 @@
 ---
-services: azure-monitor
-platforms: dotnet
-author: gucalder
+page_type: sample
+languages:
+- csharp
+products:
+- azure
+description: "his sample explains how to retrieve Monitor multi-dimensional metrics and multi-dimensional metric definitions using the Azure .NET SDK release_0.18.0-preview or higher."
+urlFragment: monitor-dotnet-multidimensional-metrics-api
 ---
 
 # Retrieve Azure Monitor multi-dimensional metrics with .NET
